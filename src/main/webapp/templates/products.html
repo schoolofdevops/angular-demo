@@ -1,0 +1,16 @@
+<div>
+	<div ng-show="loadingProducts"><img src="images/loading.gif"></img></div>
+	<div ng-repeat="prod in products">
+		<!--  <div ng-include="'templates/product.html'"></div> -->
+		<product product="prod"></product>
+	</div>
+	<br>
+	{{errorProducts}}
+	Showing {{products.length}} products
+	
+	<shopping-cart products="products">
+		<div ng-repeat="prod in products">
+			<product product="prod"></product>
+		</div>
+	</shopping-cart>
+</div>

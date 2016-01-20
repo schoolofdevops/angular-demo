@@ -1,0 +1,41 @@
+<h2>Users</h2>
+<div>
+	<div ng-show="loading"><img src="images/loading.gif"></img></div>
+	<input type="text" ng-model="searchName">
+	<!--  <input type="text" ng-model="searchUser.name">  -->
+	<table style="width: 400px">
+		<!--  <tr ng-repeat="user in users | filter:searchUser" style="background-color: {{user | colorCodeAge}}"> -->
+		<tr ng-repeat="user in users | userNameFilter:searchName" style="background-color: {{user | colorCodeAge}}">
+			<td>{{user.name}}</td>
+			<td>{{user.age}}</td>
+			<td>{{user.joinDate | date:'yyyy-MM-dd'}}</td>
+			<td><a href='' ng-click="editUser(user)">Edit</a></td>
+			<td><a href='' ng-click="deleteUser(user)">Del</a></td>
+		</tr>
+	</table>
+	{{error}}
+	Showing {{users.length}} users
+	<input type="button" value="Add User" ng-click="showAddForm=true"></input>
+	<div ng-show="showAddForm || showEditForm">
+		<form name="userForm" novalidate>
+			<input type="text" name="name" ng-model="user.name" required></input>
+			<span style="color:red" ng-show="userForm.name.$dirty && userForm.name.$invalid">
+ 					<span ng-show="userForm.name.$error.required">Username is required.</span>
+ 				</span>
+			<input type="number" name="age" ng-model="user.age"></input>
+			<span style="color:red" ng-show="userForm.age.$dirty && userForm.age.$invalid">
+ 					<span ng-show="userForm.age.$error.required">Age is required.</span>
+ 				</span>
+			<input type="date" name="joinDate" ng-model="user.joinDate"></input>
+			<span style="color:red" ng-show="userForm.joinDate.$dirty && userForm.joinDate.$invalid">
+ 					<span ng-show="userForm.joinDate.$error.required">Age is required.</span>
+ 				</span>
+			<span style="color:red" ng-show="userForm.name.$dirty && myForm.name.$invalid">
+ 					<span ng-show="myForm.name.$error.required">Username is required.</span>
+ 				</span>
+			<input type="button" value="Cancel" ng-click="showAddForm=false"></input>
+			<input type="button" value="Update" ng-show="showEditForm" ng-disabled="!userForm.$valid" ng-click="userForm.$valid && updateUser(user)"></input>
+			<input type="button" value="Save" ng-show="showAddForm" ng-disabled="!userForm.$valid" ng-click="userForm.$valid && addUser(user)"></input>
+		</form>
+	</div>
+</div>

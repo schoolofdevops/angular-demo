@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.mydomain.model.Product" table="PRODUCTS">
+		<id name="id" type="int">
+			<column name="ID" />
+			<generator class="native" />
+		</id>
+		<version column="version" name="version" type="int" insert="true" />
+		<property name="productName" type="string">
+			<column name="PRODUCT_NAME" length="500" not-null="true" />
+		</property>
+		<property name="productPrice" type="big_decimal">
+			<column name="PRODUCT_PRICE" precision="10" />
+		</property>
+		<property name="stock" >
+			<column name="STOCK" />
+		</property>
+		
+	</class>
+</hibernate-mapping>
